@@ -13,7 +13,7 @@ const verifyJwtToken = (req, res, next) => {
 };
 const verifyTokenAndAuthorization = (req, res, next) => {
   verifyJwtToken(req, res, () => {
-    if (req.user._id === req.params.id) {
+    if (req.user.id === req.params.id) {
       next();
     } else {
       res.status(403).json("access is not allowed");
