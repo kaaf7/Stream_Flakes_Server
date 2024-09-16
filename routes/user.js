@@ -41,18 +41,11 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 router.put("/:id/favorites/update", verifyTokenAndAuthorization, async (req, res) => {
-  if (req.body.password) {
-    req.body.password = CryptoJS.AES.encrypt(
-      req.body.password,
-      SECRET_KEY
-    ).toString();
-  }
-  console.log(req.params.id)
   try {
     const updatedUser = await User.findByIdAndUpdate(
     
       req.params.id,
-      { $set: { favorites: req.body.favorites } },
+      { $set: { favorites: req.body } },
       { new: true }
     );
 
